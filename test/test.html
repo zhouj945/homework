@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function makebase(base) {
+        return function (price) {
+          return base + price;
+        };
+      }
+      var level1 = makebase(12000);
+      var level2 = makebase(15000);
+
+      console.log(level1(2000));
+      console.log(level1(5000));
+    </script>
+  </body>
+</html>
