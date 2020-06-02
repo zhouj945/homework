@@ -28,27 +28,40 @@ const _ = require("lodash");
 // }
 
 // 柯里化实现
-const curry = (func) => {
-  return function curried(...args) {
-    if (args.length < func.length) {
-      return function () {
-        return curried(...args.concat(Array.from(arguments)));
-      };
-    }
-    return func(...args);
-  };
-};
+// const curry = (func) => {
+//   return function curried(...args) {
+//     if (args.length < func.length) {
+//       return function () {
+//         return curried(...args.concat(Array.from(arguments)));
+//       };
+//     }
+//     return func(...args);
+//   };
+// };
 
 // 函数柯里化
-const match = (req, str) => str.match(req);
+// const match = (req, str) => str.match(req);
 // console.log(match(/d+/g, "aa"));
 
-const newMatch = _.curry(match);
-const hasd = newMatch(/d+/g);
+// const newMatch = _.curry(match);
+// const hasd = newMatch(/d+/g);
 // console.log(hasd("aa"));
 // console.log(hasd("dd"));
 
-const filter = (func, array) => array.filter(func);
-const newFilter = curry(filter);
-const arrHasd = newFilter(hasd);
-console.log(arrHasd(["aa", "dd"]));
+// const filter = (func, array) => array.filter(func);
+// const newFilter = curry(filter);
+// const arrHasd = newFilter(hasd);
+// console.log(arrHasd(["aa", "dd"]));
+
+// 函数组合
+const compose = (...args) => (value) => args.reverse().reduce((acc, cur) => cur(acc), value);
+
+const reverse = (arr) => arr.reverse();
+const first = (arr) => arr[0];
+const toUpper = (value) => value.toUpperCase();
+
+const cArr = ["one", "two", "three"];
+
+const fn = compose(toUpper, first, reverse);
+
+console.log(fn(cArr));
