@@ -3,11 +3,13 @@ const { src, dest, series, parallel } = require("gulp");
 const babel = require("gulp-babel");
 const uglify = require("gulp-uglify");
 const del = require("delete");
+const cleanCss = require('gulp-clean-css')
+const rename = require('gulp-rename')
 /**
  * series : 按序执行
  * parallel: 并行
- * 
- * 
+ *
+ *
  *
   "clean": "gulp clean",
   "lint": "gulp lint",
@@ -16,6 +18,7 @@ const del = require("delete");
   "start": "gulp start",
   "deploy": "gulp deploy --production"
  */
+
 const clean = function (cb) {
   del(["./dist"], cb);
 };
