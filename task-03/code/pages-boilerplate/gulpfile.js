@@ -3,8 +3,11 @@ const { src, dest, series, parallel } = require("gulp");
 const babel = require("gulp-babel");
 const uglify = require("gulp-uglify");
 const del = require("delete");
-const cleanCss = require('gulp-clean-css')
-const rename = require('gulp-rename')
+const plgCleanCss = require('gulp-clean-css')
+const plgSass = require('gulp-sass')
+const plgRename = require('gulp-rename')
+const plgSwig = require('gulp-swig')
+const plgImageMin = require('gulp-imagemin')
 /**
  * series : 按序执行
  * parallel: 并行
@@ -18,8 +21,31 @@ const rename = require('gulp-rename')
   "start": "gulp start",
   "deploy": "gulp deploy --production"
  */
+const jsTranspile = () => {
+  return src('src/**/*.js', { base: 'src'}).pipe(babel({ presets: ['@babel/preset-env']})).pipe(dest('dist'))
+}
 
-const clean = function (cb) {
+const cssTranspile = () => {
+  return src('src/**/*.scss', { base: 'src'}).pipe(plgSass({ outputStyle: 'expanded'})).pipe(plgCleanCss()).pipe(dest('dist'))
+}
+
+const pageTranspile = () => {
+  return src('src/**/*.html', { base: 'src' }).pipe(plgSwig()).pipe(dest('dist'))
+}
+
+const imgTranspile = () => {
+  return src('src/assets/images/**', { base: 'src'}).pipe(plgImageMin()).pipe(dest('dist'))
+}
+
+const fontTranspile = () => {
+  return src('src/assets/fonts/**', { base: 'src'}).pipe(plgImageMin()).pipe(dest('dist'))
+}
+
+const extraFile = () => {
+  return src('public/**', { base: 'public'}).pipe(dest('dist'))
+}
+
+const clean = (cb) => {
   del(["./dist"], cb);
 };
 const lint = function (cb) {
@@ -28,10 +54,7 @@ const lint = function (cb) {
 const serve = function (cb) {
   cb(new Error("boom"));
 };
-const build = function (cb) {
-  return src("src/**/*.js").pipe(babel()).pipe(dest("dist/"));
-  cb(new Error("boom"));
-};
+
 const start = function (cb) {
   cb(new Error("boom"));
 };
@@ -43,10 +66,14 @@ const deploy = function (cb) {
   }
 };
 
-exports.clean = clean;
-exports.lint = lint;
-exports.serve = serve;
-exports.build = build;
-exports.start = start;
-exports.deploy = deploy;
-exports.default = series(clean, build);
+const compile = parallel(jsTranspile, cssTranspile, pageTranspile, imgTranspile, fontTranspile)
+const build = series(clean, parallel(compile, extraFile))
+module.exports = {
+  clean,
+  lint,
+  serve,
+  build,
+  start,
+  deploy,
+  imgTranspile
+}
