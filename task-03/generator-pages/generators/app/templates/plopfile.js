@@ -20,7 +20,7 @@ module.exports = function (plop) {
     actions: [
       {
         type: 'add',
-        path: 'src/{{name}}.js',
+        path: 'src/{{name}}.html',
         templateFile: 'plop-templates/controller.hbs',
       },
     ],
