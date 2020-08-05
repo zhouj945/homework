@@ -42,14 +42,14 @@ const jsTranspile = () => {
   return src("src/**/*.js", { base: "src" })
     .pipe(plugins.babel({ presets: ["@babel/preset-env"] }))
     .pipe(plugins.uglify())
-    .pipe(dest("tmp"));
+    .pipe(dest("temp"));
 };
 // 处理scss文案
 const cssTranspile = () => {
   return src("src/**/*.scss", { base: "src" })
     .pipe(plugins.sass({ outputStyle: "expanded" }))
     .pipe(plugins.cleanCss())
-    .pipe(dest("tmp"));
+    .pipe(dest("temp"));
 };
 // 处理 html模版文件
 const pageTranspile = () => {
@@ -57,7 +57,7 @@ const pageTranspile = () => {
     src("src/**/*.html", { base: "src" })
       .pipe(plugins.swig({ defaults: { cache: false }, data }))
       // .pipe(plugins.useref())
-      .pipe(dest("tmp"))
+      .pipe(dest("temp"))
   );
 };
 // 处理图片文件
@@ -74,16 +74,16 @@ const fontTranspile = () => {
 };
 // 额外文件复制到dist
 const extraFile = () => {
-  return src("public/**", { base: "public" }).pipe(dest("dist"));
+  return src("public/**", { base: "./" }).pipe(dest("dist"));
 };
 
 // 处理dist目录下 html 里的   js css  的引用链接哦
 // 先执行compile任务 再执行userefOut 不然 html文件内没有注释了  执行userefOut 不会有用js 和 css 的文件生成 就不会执行 相关压缩
 const userefOut = () => {
-  return src("tmp/**.html", {
-    base: "tmp",
+  return src("temp/**.html", {
+    base: "temp",
   })
-    .pipe(plugins.useref({ searchPath: ["tmp", "."] }))
+    .pipe(plugins.useref({ searchPath: ["temp", "."] }))
     .pipe(
       plugins.if(
         "*.html",
@@ -101,7 +101,7 @@ const userefOut = () => {
 
 // 清理dist目录
 const clean = (cb) => {
-  del(["./dist", "./tmp"], cb);
+  del(["./dist", "./temp"], cb);
 };
 
 // 启动服务 browsersync
@@ -120,9 +120,9 @@ const serve = () => {
     open: false,
     port: 2080,
     // notify: false,
-    files: ["tmp/**"],
+    files: ["temp/**"],
     server: {
-      baseDir: ["tmp", "src", "public"], // 多个基目录 会逐级寻找
+      baseDir: ["temp", "src", "public"], // 多个基目录 会逐级寻找
       routes: {
         "/node_modules": "node_modules",
       },
@@ -161,6 +161,4 @@ module.exports = {
   build,
   start,
   deploy,
-  compile,
-  userefOut,
 };
