@@ -1,13 +1,16 @@
 // 实现这个项目的构建任务
 const { src, dest, series, parallel } = require("gulp");
-const babel = require("gulp-babel");
-const uglify = require("gulp-uglify");
+const loadPlugins = require('gulp-load-plugins')
+const plugins = loadPlugins()
 const del = require("delete");
-const plgCleanCss = require('gulp-clean-css')
-const plgSass = require('gulp-sass')
-const plgRename = require('gulp-rename')
-const plgSwig = require('gulp-swig')
-const plgImageMin = require('gulp-imagemin')
+
+// const babel = require("gulp-babel");
+// const uglify = require("gulp-uglify");
+// const plgCleanCss = require('gulp-clean-css')
+// const plgSass = require('gulp-sass')
+// const plgRaname = require('gulp-rename')
+// const plgSwig = require('gulp-swig')
+// const plgImageMin = require('gulp-imagemin')
 /**
  * series : 按序执行
  * parallel: 并行
@@ -22,23 +25,23 @@ const plgImageMin = require('gulp-imagemin')
   "deploy": "gulp deploy --production"
  */
 const jsTranspile = () => {
-  return src('src/**/*.js', { base: 'src'}).pipe(babel({ presets: ['@babel/preset-env']})).pipe(dest('dist'))
+  return src('src/**/*.js', { base: 'src'}).pipe(plugins.babel({ presets: ['@babel/preset-env']})).pipe(dest('dist'))
 }
 
 const cssTranspile = () => {
-  return src('src/**/*.scss', { base: 'src'}).pipe(plgSass({ outputStyle: 'expanded'})).pipe(plgCleanCss()).pipe(dest('dist'))
+  return src('src/**/*.scss', { base: 'src'}).pipe(plugins.sass({ outputStyle: 'expanded'})).pipe(plugins.cleanCss()).pipe(dest('dist'))
 }
 
 const pageTranspile = () => {
-  return src('src/**/*.html', { base: 'src' }).pipe(plgSwig()).pipe(dest('dist'))
+  return src('src/**/*.html', { base: 'src' }).pipe(plugins.swig()).pipe(dest('dist'))
 }
 
 const imgTranspile = () => {
-  return src('src/assets/images/**', { base: 'src'}).pipe(plgImageMin()).pipe(dest('dist'))
+  return src('src/assets/images/**', { base: 'src'}).pipe(plugins.imagemin()).pipe(dest('dist'))
 }
 
 const fontTranspile = () => {
-  return src('src/assets/fonts/**', { base: 'src'}).pipe(plgImageMin()).pipe(dest('dist'))
+  return src('src/assets/fonts/**', { base: 'src'}).pipe(plugins.imagemin()).pipe(dest('dist'))
 }
 
 const extraFile = () => {
