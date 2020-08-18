@@ -12,7 +12,12 @@ module.exports = {
     rules: [
       {
         test: /.js$/,
-        use: 'babal-loader'
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
       },
       {
         test: /.css$/,   // 匹配遇到的模块文件
@@ -22,8 +27,17 @@ module.exports = {
         test: /.png$/,
         use: {
           loader: 'url-loader',
-          option: {
+          options: {
             limit: 10 * 1024 // 10KB
+          }
+        }
+      },
+      {
+        test: /.html$/,
+        use: {
+          loader: 'html-loader',
+          options: {
+            attrs: ['img:src', 'a:href']
           }
         }
       }
