@@ -12,22 +12,22 @@ module.exports = {
   module: {
     // 其他模块的 加载规则设置
     rules: [
-      // {
-      //   test: /.md$/,
-      //   use: [
-      //     'html-loader',
-      //     './markdown-loader'
-      //   ]
-      // },
       {
-        test: /.js$/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env']
-          }
-        }
+        test: /.md$/,
+        use: [
+          'html-loader',
+          './markdown-loader'
+        ]
       },
+      // {
+      //   test: /.js$/,
+      //   use: {
+      //     loader: 'babel-loader',
+      //     options: {
+      //       presets: ['@babel/preset-env']
+      //     }
+      //   }
+      // },
       {
         test: /.css$/,   // 匹配遇到的模块文件
         use: ['style-loader', 'css-loader'] // 使用 对应的 loader 处理模块文件
