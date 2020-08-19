@@ -1,15 +1,24 @@
 const path = require('path')
+const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
   mode: 'none',
   entry: "./src/index.js",
   output: {
     filename: 'bundle.js',
     path: path.join(__dirname, 'dist'),
-    publicPath: 'dist/'   // _webpack.require_.p
+    //publicPath: 'dist/'   // _webpack.require_.p
   },
   module: {
     // 其他模块的 加载规则设置
     rules: [
+      // {
+      //   test: /.md$/,
+      //   use: [
+      //     'html-loader',
+      //     './markdown-loader'
+      //   ]
+      // },
       {
         test: /.js$/,
         use: {
@@ -32,15 +41,19 @@ module.exports = {
           }
         }
       },
-      {
-        test: /.html$/,
-        use: {
-          loader: 'html-loader',
-          options: {
-            attrs: ['img:src', 'a:href']
-          }
-        }
-      }
+      // {
+      //   test: /.html$/,
+      //   use: {
+      //     loader: 'html-loader',
+      //     options: {
+      //       attrs: ['img:src', 'a:href']
+      //     }
+      //   }
+      // }
     ]
-  }
+  },
+  plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin()
+  ]
 }
