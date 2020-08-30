@@ -4,7 +4,7 @@ export default ()=> {
   element.textContent = 'hello world'
   element.classList.add('heading')
   element.addEventListener('click', ()=> {
-    alert('hellp')
+    alert('hellp212')
   })
   return element
 }
