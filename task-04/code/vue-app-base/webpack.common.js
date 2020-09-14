@@ -22,9 +22,19 @@ module.exports = {
         loader: 'babel-loader',
         exclude: '/node_modules/',
       },
+      // {
+      //   test: /\.(less)$/,
+      //   loader: ['vue-style-loader', 'css-loader', 'less-loader'],
+      //   exclude: '/node_modules/',
+      // },
       {
-        test: /\.(less|css)$/,
-        loader: ['vue-style-loader', 'css-loader', 'less-loader'],
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+        exclude: '/node_modules/',
+      },
+      {
+        test: /\.less$/,
+        use: ['style-loader', 'css-loader', 'less-loader'],
         exclude: '/node_modules/',
       },
       {
