@@ -8,9 +8,12 @@ module.exports = merge(commonConfig, {
   mode: 'development',
   devServer: {
     hot: true,
-    hotOnly: true,
-    contentBase: path.join(__dirname, '/dist'),
+    // hotOnly: true,
+    contentBase: path.join(__dirname, 'dist'),
     compress: true,
+    progress: true,
+    inline: true,
+    quiet: true,
     port: 9000,
   },
   plugins: [
