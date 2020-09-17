@@ -1,12 +1,11 @@
 const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   entry: path.join(__dirname, '/src/main.js'),
   output: {
-    filename: '[name].[hash].bundle.js',
+    filename: '[name].bundle.js',
     path: path.join(__dirname, 'dist'),
     publicPath: './',
   },
@@ -66,12 +65,6 @@ module.exports = {
       templateParameters: {
         BASE_URL: './favicon.ico',
       },
-    }),
-    new CopyWebpackPlugin({
-      patterns: [
-        { from: __dirname + '/public', to: __dirname + '/dist', toType: 'dir' },
-        { from: __dirname + '/src/assets', to: __dirname + '/dist/assets' },
-      ],
     }),
   ],
 }

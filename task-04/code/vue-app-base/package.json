@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "npx webpack-dev-server --open --config webpack.dev.js",
+    "serve": "npx webpack-dev-server --config webpack.dev.js",
     "dev": "npx webpack --config webpack.dev.js",
     "build": "npx webpack --config webpack.prod.js",
     "lint": "echo \"请使用 ESLint 实现此任务\""

@@ -9,7 +9,9 @@ module.exports = merge(commonConfig, {
   devServer: {
     hot: true,
     // hotOnly: true,
-    contentBase: path.join(__dirname, 'dist'),
+    publicPath: './dist',
+    contentBase: [path.join(__dirname, '/dist'), './public', './assets'],
+    historyApiFallback: true,
     compress: true,
     progress: true,
     inline: true,
@@ -17,10 +19,10 @@ module.exports = merge(commonConfig, {
     port: 9000,
   },
   plugins: [
-    new CleanWebpackPlugin(),
     // new DefinePlugin({
     //   BASE_URL: JSON.stringify('https://api.example.com'),
     // }),
+    // new CleanWebpackPlugin(),
     new HotModuleReplacementPlugin(),
   ],
 })
