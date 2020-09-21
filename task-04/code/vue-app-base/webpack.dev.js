@@ -9,7 +9,7 @@ module.exports = merge(commonConfig, {
   devServer: {
     hot: true,
     // hotOnly: true,
-    publicPath: './dist',
+    publicPath: '/',
     contentBase: [path.join(__dirname, '/dist'), './public', './assets'],
     historyApiFallback: true,
     compress: true,

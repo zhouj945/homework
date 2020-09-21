@@ -15,22 +15,22 @@ module.exports = {
       {
         test: /\.(vue)$/,
         loader: 'vue-loader',
-        exclude: '/node_modules/',
+        exclude: /node_modules/
       },
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: '/node_modules/',
+        exclude: /node_modules/
       },
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
-        exclude: '/node_modules/',
+        exclude: /node_modules/
       },
       {
         test: /\.less$/,
         use: ['style-loader', 'css-loader', 'less-loader'],
-        exclude: '/node_modules/',
+        exclude: /node_modules/
       },
       {
         test: /\.(png|jpg|gif|ico)$/i,
