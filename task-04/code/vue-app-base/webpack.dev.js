@@ -1,7 +1,7 @@
 const path = require('path')
+const webpack = require('webpack')
 const commonConfig = require('./webpack.common')
 const { merge } = require('webpack-merge')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const { DefinePlugin, HotModuleReplacementPlugin } = require('webpack')
 
 module.exports = merge(commonConfig, {
@@ -9,7 +9,7 @@ module.exports = merge(commonConfig, {
   devServer: {
     hot: true,
     // hotOnly: true,
-    publicPath: './dist',
+    publicPath: '/',
     contentBase: [path.join(__dirname, '/dist'), './public', './assets'],
     historyApiFallback: true,
     compress: true,
@@ -18,11 +18,12 @@ module.exports = merge(commonConfig, {
     quiet: true,
     port: 9000,
   },
+  devtool: 'cheap-module-eval-souce-map',
   plugins: [
     // new DefinePlugin({
     //   BASE_URL: JSON.stringify('https://api.example.com'),
     // }),
-    // new CleanWebpackPlugin(),
     new HotModuleReplacementPlugin(),
+    new webpack.optimize.ModuleConcatenationPlugin(),
   ],
 })
