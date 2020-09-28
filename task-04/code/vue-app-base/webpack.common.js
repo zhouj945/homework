@@ -15,11 +15,16 @@ module.exports = {
       {
         test: /\.(vue)$/,
         loader: 'vue-loader',
+<<<<<<< HEAD
         exclude: /node_modules/,
+=======
+        exclude: /node_modules/
+>>>>>>> be60277167217e623ed79a655a225babb1adafe7
       },
       {
         test: /\.js$/,
         loader: 'babel-loader',
+<<<<<<< HEAD
         exclude: /node_modules/,
       },
       {
@@ -43,6 +48,19 @@ module.exports = {
           'less-loader',
         ],
         exclude: /node_modules/,
+=======
+        exclude: /node_modules/
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+        exclude: /node_modules/
+      },
+      {
+        test: /\.less$/,
+        use: ['style-loader', 'css-loader', 'less-loader'],
+        exclude: /node_modules/
+>>>>>>> be60277167217e623ed79a655a225babb1adafe7
       },
       // {
       //   test: /\.less$/,
