@@ -2,6 +2,11 @@ const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+// @type 是 jsDoc
+// import('webpack').Configuration  是 ts
+/**
+ * @type {import('webpack').Configuration}
+ */
 module.exports = {
   entry: path.join(__dirname, '/src/main.js'),
   output: {
@@ -15,16 +20,11 @@ module.exports = {
       {
         test: /\.(vue)$/,
         loader: 'vue-loader',
-<<<<<<< HEAD
         exclude: /node_modules/,
-=======
-        exclude: /node_modules/
->>>>>>> be60277167217e623ed79a655a225babb1adafe7
       },
       {
         test: /\.js$/,
         loader: 'babel-loader',
-<<<<<<< HEAD
         exclude: /node_modules/,
       },
       {
@@ -48,19 +48,6 @@ module.exports = {
           'less-loader',
         ],
         exclude: /node_modules/,
-=======
-        exclude: /node_modules/
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
-        exclude: /node_modules/
-      },
-      {
-        test: /\.less$/,
-        use: ['style-loader', 'css-loader', 'less-loader'],
-        exclude: /node_modules/
->>>>>>> be60277167217e623ed79a655a225babb1adafe7
       },
       // {
       //   test: /\.less$/,
