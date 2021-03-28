@@ -39,4 +39,4 @@
 之前template需要顶级标签，现在不需要了，  现在diff 会标记静态节点， 在数据发生改变 只会比较 动态节点的变化， 缓存事件处理函数， 会减少重复渲染次数
 
 #### 5、Vue.js 3.0 响应式系统的实现原理？
-利用 proxy 监听数据， 劫持 get set  方法里 track 函数 收集依赖 effect函数，  利用 weakMap -> Map -> set   收集依赖   在 trigger 内执行 依赖函数
+利用 proxy 监听数据， 劫持 get set  方法里 track 函数 收集依赖 effect函数，  利用 weakMap(key：目标对象) -> depsMap（key：目标对象的属性名称） ->dep (new set() effect函数)   收集依赖   在 trigger 内执行 依赖函数
