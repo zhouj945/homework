@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/zhouj945/homework#readme",
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "lodash": "^4.17.15",
     "nrm": "^1.2.1"
   },
